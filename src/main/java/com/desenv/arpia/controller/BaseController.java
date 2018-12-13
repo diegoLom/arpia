@@ -27,19 +27,18 @@ public abstract class BaseController<T extends BaseEntity<I>, I>  {
 	
 	public void setRepository( JpaRepository<T, I> arg0){
 		repository = arg0 ; 
-		
-	}
+		}
 
 	public java.util.List pegarTodos() {
 		return repository.findAll();
 	};
 	
-	
+ 	@GetMapping("{id}")	
 	public Optional<T> pegar(I i) {
 		return repository.findById(i);
 	};
 	
-	
+	@GetMapping
 	public List<T> pegarTs(){
 		return pegarTodos();
 	}
@@ -54,6 +53,8 @@ public abstract class BaseController<T extends BaseEntity<I>, I>  {
 		deletar(id);
 	}
 	
+	
+	@PostMapping()
 	public ResponseEntity<Object> createT(@RequestBody T t){
 		T savedT = repository.save(t);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedT).toUri();
@@ -62,7 +63,7 @@ public abstract class BaseController<T extends BaseEntity<I>, I>  {
 		
 	}
 	
-	
+	@PutMapping("{id}")
 	public ResponseEntity<Object> atualizarT(@RequestBody T t, @PathVariable I id) {
 		Optional<T> studentOptional = repository.findById( id);
 
@@ -76,6 +77,7 @@ public abstract class BaseController<T extends BaseEntity<I>, I>  {
 		return ResponseEntity.noContent().build();
 	}
 	
+ 	@DeleteMapping("{id}") 
 	public Boolean deletar(I i) {
 		Boolean retorno = false; 
 		
