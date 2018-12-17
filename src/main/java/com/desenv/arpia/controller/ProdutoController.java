@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,11 +19,10 @@ import com.desenv.arpia.domains.Produto;
 import com.desenv.arpia.repositories.ProdutoRepository;
 import com.desenv.arpia.repositories.ProdutoRepository;
 
-@RestController("/produto")
+@RestController
+@RequestMapping("/produto")
 public class ProdutoController  extends BaseController<Produto, Integer> {
 
-	
-	
 	private ProdutoRepository produtoRepository;
 	
 	@Autowired
@@ -32,33 +32,5 @@ public class ProdutoController  extends BaseController<Produto, Integer> {
 	}
 	
 	
-	@GetMapping
-	public List<Produto> pegarProtudos(){
-		return pegarTodos();
-	}
-	
-	
-	@GetMapping("/produto/{id}")
-	public Produto pegarProduto(@RequestParam Integer id){
-		return pegar(id).get();
-	}
-	
-	
-	@DeleteMapping("/produto/{id}")
-	public void deletarProduto(@RequestParam Integer id){
-		deletar(id);
-	}
-	
-	@PostMapping("/produto")
-	public ResponseEntity<Object> createProduto(@RequestBody Produto t){
-		return this.createProduto(t);
-		
-	}
-	
-	
-	@PutMapping("/produto/{id}")
-	public ResponseEntity<Object> atualizar(@RequestBody Produto t, @PathVariable Integer id) {
-		return atualizarT(t, id);
-	}
 	
 }
