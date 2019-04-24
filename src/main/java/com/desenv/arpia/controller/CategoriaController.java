@@ -33,9 +33,4 @@ public class CategoriaController extends BaseController<Categoria, Integer> {
 	}
 	
 	
-	
-	
-
-
-
 }

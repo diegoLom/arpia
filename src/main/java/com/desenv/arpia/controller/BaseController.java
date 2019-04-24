@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,7 +29,6 @@ public abstract class BaseController<T extends BaseEntity<I>, I>  {
 	
 	public void setRepository( JpaRepository<T, I> arg0){
 		repository = arg0 ; 
-		
 	}
 	
 	@GetMapping 
@@ -46,8 +47,9 @@ public abstract class BaseController<T extends BaseEntity<I>, I>  {
 	}
 	
 	
-	@DeleteMapping("{id}") 
-	public void deletarT(@RequestParam I id){
+	//@DeleteMapping("{id}") 
+	@RequestMapping(method=RequestMethod.DELETE)
+	public void deletarT(@RequestParam(required=true) I id){
 		deletar(id);
 	}
 	

@@ -2,12 +2,16 @@ package com.desenv.arpia.domains;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 @Entity
+@JsonAutoDetect
 public class Produto implements BaseEntity<Integer>{
 
 	@Id
